@@ -1,0 +1,67 @@
+:host {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 400x;
+    background-color: black;
+    color: white;
+    border-bottom: 5px solid black;
+    font-size: 20px;
+
+    .header {
+        display: inline-block;
+        position: relative;
+        height: 40px;
+        white-space: nowrap;
+        padding: 0 10px;
+
+        .header-title {
+            line-height: 40px;
+
+            & > p {
+                display: inline-block;
+                margin: 0 4px 0 8px;
+            }
+        }
+    }
+
+    .submenu {
+        display: inline-block;
+        position: absolute;
+        top: 40px;
+        left: 0;
+        width: 150px;
+        background-color: black;
+        padding: 6px 0;
+
+        .submenu-item {
+            position: relative;
+            padding: 5px 8px;
+            
+            & > p {
+                display: inline-block;
+                margin: 0 4px 0 8px;
+            }
+        }
+    }
+
+    .innermenu {
+        display: inline-block;
+        position: absolute;
+        top: 40px;
+        left: 150px;
+        width: 150px;
+        padding: 6px 0;
+        background-color: black;
+
+        .innermenu-item {
+            position: relative;
+            padding: 5px 8px;
+
+            & > p {
+                display: inline-block;
+                margin: 0 4px 0 8px;
+            }
+        }
+    }
+}

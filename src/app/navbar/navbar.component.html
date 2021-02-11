@@ -1,0 +1,29 @@
+<div class="header" *ngFor='let menu of navigationService.navMenu'>
+    <div class="header-title" (mouseover)="navigationService.openMenu(menu)">
+        <p>{{menu.title}}</p>
+    </div>
+
+    <div [hidden]="!menu.isOpen">
+        <div class="submenu" *ngIf="menu.menu">
+            <span *ngFor="let submenu of menu.menu">
+                <div class="submenu-item" (mouseover)="navigationService.openSubMenu(submenu)">
+                    <p>{{submenu.title}}</p>
+                </div>
+            </span>
+        </div>
+    </div>
+
+    <div *ngIf="menu.menu">
+        <span *ngFor="let submenu of menu.menu">
+            <div [hidden]="!submenu.isOpen">
+                <div class="innermenu" *ngIf="submenu.innerMenu">
+                    <span *ngFor="let innerMenuItem of submenu.innerMenu">
+                        <div class="innermenu-item">
+                            <p *ngIf="innerMenuItem.title">{{innerMenuItem.title}}</p>
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </span>
+    </div>
+</div>
