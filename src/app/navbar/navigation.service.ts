@@ -121,41 +121,31 @@ export class NavigationService {
 
     getMenu() {
         let grouped = _.groupBy(this.menuConfig, "PARENT_TAG");
-        return this.getItems(grouped.MAIN, grouped);
 
+        return _.map(grouped.MAIN, (item) => {
+            return {
+                title: item.TITLE,
+                menu: this.getSubMenu(item, grouped)
+            }
+        })
     }
 
-    getItems(items, grouped) {
-        let subMenu = [];
-        _.forEach(items, (item) => {
-            let newItem = this.getItem(item, grouped)
-            if (newItem) {
-                subMenu.push(newItem);
-            }
-        });
-        return subMenu;
-    }
-
-    getItem(item, grouped) {
-        if (grouped[item.TAG]) {
-            let subMenu = this.getItems(grouped[item.TAG], grouped);
-            if (subMenu && subMenu.length) {
-                return {
-                    title: item.TITLE,
-                    menu: subMenu
-                }
-            }
+    getSubMenu(item, grouped) {
+        if (!grouped[item.TAG]) {
+            return null;
         } else {
-            let newItem = {
-                title: item.TITLE
-            }
-            return newItem;
-        }
+            return grouped[item.TAG].map((sub) => {
+                return {
+                    title: sub.TITLE,
+                    innerMenu: grouped[sub.TAG] ? this.getSubMenu(sub, grouped) : null
+                }
+            });
+        };
     }
 
     openMenu(menu) {
         this.closeMenus();
-        menu.isOpen = true;
+        menu.isOpen = true
     }
 
     openSubMenu(subMenu) {
